@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>rinko / admin panel</title>
+		<link rel="stylesheet" href="/_/styles.css">
+		<link rel="shortcut icon" href="/favicon.png" type="image/png">
+	</head>
+
+	<body>
+		<div class="center-container">
+			<div>
+				<h1>admin panel</h1>
+				<p>enter your api token to continue:</p>
+			</div>
+		</div>
+
+		<div class="auth-section" id="authSection">
+			<input type="password" id="apiToken" placeholder="enter your api token">
+			<button onclick="authenticate()">login</button>
+		</div>
+
+		<div id="adminPanel" class="hidden">
+			<div class="actions">
+				<button onclick="fetchLinks()">refresh list</button>
+				<button id="addLinkButton" onclick="showAddForm()">add new link</button>
+				<button id="unselectAllButton" class="hidden" onclick="unselectAll()">unselect all</button>
+				<button id="deleteSelectedButton" onclick="deleteSelected()" style="background-color: #f44336;">delete selected</button>
+			</div>
+
+			<div style="overflow-x:auto;">
+				<table id="linksTable">
+					<thead>
+						<tr>
+							<th></th>
+							<th>slug</th>
+							<th>url</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody id="linksTableBody">
+						<!-- Links will be populated here -->
+					</tbody>
+				</table>
+			</div>
+
+			<div id="addLinkForm" class="hidden">
+				<div class="form">
+					<h3 id="formTitle">add new link</h3>
+					<input type="hidden" id="editMode" value="false">
+					<input type="hidden" id="originalSlug">
+					<label for="newSlug">slug:</label>
+					<input type="text" id="newSlug" placeholder="Enter slug (short name)">
+					<label for="newUrl">url:</label>
+					<input type="text" id="newUrl" placeholder="Enter full URL">
+					<button id="formSubmitButton">add link</button>
+					<button onclick="hideAddForm()" style="background-color: #f44336;">cancel</button>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<span>rinko</span>
+			<span><a href="https://github.com/apix0n" target="_blank">by apix</a></span>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+
+:root {
+    --accent: #da86eb;
+    --accent-darker: #cf67e4;
+    --background: #f0f0f0;
+    --text: #000;
+}
+
+* {
+    font-family: inherit;
+    accent-color: var(--accent-darker);
+}
+
+body {
+    margin: 0;
+    font-family: Outfit, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.center-container h1 {
+    font-size: 5rem;
+    margin: 0;
+}
+
+.center-container p {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--accent);
+}
+
+footer {
+    text-align: center;
+    font-size: 1rem;
+    padding: 20px;
+}
+
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+footer span:not(:first-child)::before {
+    content: '- ';
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* admin panel */
+.center-container {
+    height: unset;
+}
+
+.auth-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: calc(2rem + 20px);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.auth-section button {
+    width: 100%;
+}
+
+input[type="password"],
+input[type="text"] {
+    padding: 8px;
+    width: 100%;
+    margin: 5px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 2rem;
+    box-sizing: border-box;
+    font-size: inherit;
+}
+
+button {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+button:hover {
+    background-color: var(--accent-darker);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td a {
+    color: rgb(0, 101, 252);
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td:nth-child(2) a {
+    color: inherit;
+    text-decoration: none;
+}
+
+td:nth-child(2) a:hover {
+    text-decoration: underline;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#addLinkForm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    background-color: var(--background);
+    box-sizing: border-box;
+    padding: 1.5em;
+    border-radius: 2.5em;
+    border: 1px solid #ddd;
+}
+
+.form h3 {
+    margin-top: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media screen and (max-width: 930px) {
+    body {
+        display: block;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+
+    .form {
+        border-radius: 0;
+        border: unset;
+        height: 100%;
+        width: 100%;
+    }
+}

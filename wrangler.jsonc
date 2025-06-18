@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rinko",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-06-18",
+  "assets": {
+    "directory": "./static"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "kv_namespaces": [
+    {
+      "binding": "LINKS",
+      "id": "46b60874f93b4946aeb35727b4086368"
+    }
+  ],
+}
