@@ -61,10 +61,10 @@ $ curl {rinko url}/_/set -d "slug=google&overwrite=true" -H "Authorization: Bear
 
 ```json
 [
-    {
-        "slug": "github",
-        "url": "https://github.com/apix0n"
-    },
+	{
+		"slug": "github",
+		"url": "https://github.com/apix0n"
+	},
 	{
 		"slug": "yt",
 		"url": "https://www.youtube.com/watch?v=shs0rAiwsGQ"
