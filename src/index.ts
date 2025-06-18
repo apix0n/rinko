@@ -18,29 +18,26 @@ app.use('/_/*', (c, next) => {
 	return auth(c, next);
 });
 
-function logRequest(c: Context, slug: string, url: string | null) {
+function cfData(c: Context) {
 	const request = c.req;
 	const cf = request.raw.cf;
 
-	console.log({
-		slug,
-		url,
-		user: {
-			continent: cf?.continent,
-			country: cf?.country,
-			region: cf?.region,
-			city: cf?.city,
-			as: cf?.asOrganization,
-			ua: request.header('User-Agent'),
-			ip: getConnInfo(c).remote.address,
-		}
-	})
+	return {
+		continent: cf?.continent,
+		country: cf?.country,
+		region: cf?.region,
+		city: cf?.city,
+		as: cf?.asOrganization,
+		ua: request.header('User-Agent'),
+		ip: getConnInfo(c).remote.address,
+	}
 }
 
 app.post('/_/set', async (c) => {
 	try {
 		const payload = await getPayload(c);
 		const result = await addLink(c.env, payload.slug, payload.url, payload.overwrite);
+		console.log({ ...result, type: "set", user: cfData(c) })
 		if (Object.keys(result).length === 1 && Object.keys(result)[0] === 'message') return c.json(result, 400);
 		return c.json(result);
 	} catch (error) {
@@ -60,7 +57,12 @@ app.all('/_/*', (c) => {
 app.get('/*', async (c) => {
 	const slug = c.req.path.substring(1); // Remove leading slash
 	const url = await c.env.LINKS.get(slug);
-	logRequest(c, slug, url);
+	console.log({
+		type: "link",
+		slug,
+		url,
+		user: cfData(c),
+	})
 	if (url === null) {
 		return c.status(404);
 	}

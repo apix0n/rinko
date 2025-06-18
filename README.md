@@ -1,8 +1,14 @@
 # rinko (りんこ)
 
-a url shortener built on the [cloudflare developer platform](https://developers.cloudflare.com) (workers & kv).
+a url shortener built using [hono](https://hono.dev/) on the [cloudflare developer platform](https://developers.cloudflare.com) (workers & kv).
 
 this is a rebuild of [shrty.dev](https://github.com/craigsdennis/shorty-dot-dev) without all the ai shit (a chatbot as admin panel and an ai-generated favicon like-?).
+
+## semi-one-click deploy*
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fapix0n%2Frinko)
+
+using this button, you can deploy rinko to cloudflare workers, but it won't have an defined `API_SECRET`; learn more just below.
 
 ## link management
 
@@ -10,7 +16,7 @@ this is a rebuild of [shrty.dev](https://github.com/craigsdennis/shorty-dot-dev)
 
 > in local development, the api is protected by the token specified in `.dev.vars`.
 >
-> when deploying, use the cloudflare dashboard or `wrangler` to add an `API_SECRET` environment variable to your worker. [worker secrets / cloudflare docs >](https://developers.cloudflare.com/workers/configuration/secrets/#secrets-on-deployed-workers)
+> when deploying, you need to use the cloudflare dashboard or `wrangler` to add an `API_SECRET` environment variable to your worker. [worker secrets / cloudflare docs >](https://developers.cloudflare.com/workers/configuration/secrets/#secrets-on-deployed-workers)
 
 ---
 

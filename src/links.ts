@@ -42,13 +42,11 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
             slug,
             message: `Deleted link ${slug}`,
         };
-        console.log(msg);
         return msg;
     }
 
     // Handle regular cases
     const existing = await env.LINKS.get(slug);
-    console.log({ slug, url, overwrite });
     if (existing !== null) {
         if (Boolean(overwrite)) {
             console.log(`Overriding link ${slug}`);
@@ -59,7 +57,6 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
                 link: `/${slug}`,
                 message: `Did not update ${slug} because it already was pointing to ${existing} and overwrite was set to ${overwrite}.`,
             }
-            console.log(msg)
             return msg;
         }
     }
@@ -69,7 +66,6 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
         const msg = {
             message: 'URL must be provided when creating or updating a link'
         }
-        console.log(msg.message)
         return msg
     }
 
@@ -78,13 +74,11 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
         const msg = {
             message: 'You hit a reserved slug. Please choose another one and try again.'
         }
-        console.log(msg.message)
         return msg
     }
 
     await env.LINKS.put(slug, url);
     const link = { slug, url, link: `/${slug}` }
-    console.log(link)
     return link;
 }
 
