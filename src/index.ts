@@ -29,6 +29,8 @@ function cfData(c: Context) {
 		city: cf?.city,
 		as: cf?.asOrganization,
 		ua: request.header('User-Agent'),
+		ref: request.header('Referer'),
+		q: request.query(),	
 		ip: getConnInfo(c).remote.address,
 	}
 }
