@@ -20,6 +20,9 @@ app.get('/favicon.ico', (c) => c.redirect('/_/favicon.png'))
 
 app.get('/_/search', (c) => {
 	let query = c.req.query()['q'];
+	const url = new URL(c.req.url)
+	const origin = url.origin
+	if (!query) return c.html(searchPage(origin))
 	query = query.trim().replace(/ /g, '/') // replace space with /
 	query = decodeURIComponent(query) // decode the URI component
 	return c.redirect('/' + query + '?source=rinkoSearch');

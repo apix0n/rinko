@@ -32,6 +32,7 @@ body {
     align-items: center;
     height: 100%;
     text-align: center;
+    margin-top: 5em;
 }
 
 .center-container h1 {
@@ -63,11 +64,16 @@ footer span:not(:first-child)::before {
     content: '- ';
 }
 
-footer a:hover {
+a:hover {
     text-decoration: underline;
 }
 
 /* admin panel */
+#adminPanel {
+    width: 100%;
+    max-width: 1200px;
+}
+
 .auth-section {
     margin: 20px 0;
     padding: 20px;
@@ -143,6 +149,7 @@ th {
 
 td a {
     color: rgb(0, 101, 252);
+    text-decoration: none;
 }
 
 tr:nth-child(even) {
@@ -154,14 +161,15 @@ td:nth-child(2) a {
     text-decoration: none;
 }
 
-td:nth-child(2) a:hover {
-    text-decoration: underline;
+th:not(:nth-child(3)) {
+    width: 0;
 }
 
 .actions {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 #addLinkForm,
@@ -190,7 +198,8 @@ td:nth-child(2) a:hover {
     margin-top: 0;
 }
 
-.form .actions, td .actions {
+.form .actions,
+td .actions {
     margin: 0;
     width: fit-content;
 }
@@ -204,15 +213,15 @@ td:nth-child(2) a:hover {
         align-items: normal;
     }
 
-    .actions {
-        justify-content: center;
-    }
-
     .form {
         border-radius: 0;
         border: unset;
         height: 100%;
         width: 100%;
+    }
+
+    .center-container {
+        margin-top: 3em;
     }
 
     .center-container h1 {
