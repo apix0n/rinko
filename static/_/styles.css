@@ -198,4 +198,8 @@ td:nth-child(2) a:hover {
         height: 100%;
         width: 100%;
     }
+    
+    .center-container h1 {
+        font-size: 3.5em;
+    }
 }

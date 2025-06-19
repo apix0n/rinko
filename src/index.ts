@@ -11,6 +11,8 @@ export type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+app.get('/favicon.ico', (c) => c.redirect('/_/favicon.png'))
+
 app.get('/_/search', (c) => {
 	let query = c.req.query()['q'];
 	query = query.trim().replace(/ /g, '/') // replace space with /

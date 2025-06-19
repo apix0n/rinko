@@ -18,7 +18,7 @@ export function searchPage(origin: string): string {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>rinko / add search plugin</title>
+        <title>rinko // add search plugin</title>
         <link rel="stylesheet" href="/_/styles.css">
         <link rel="shortcut icon" href="/_/favicon.png" type="image/png">
         <link rel="search" type="application/opensearchdescription+xml" title="rinko" href="/_/search.xml" />

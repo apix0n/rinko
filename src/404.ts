@@ -4,7 +4,7 @@ export const fourZeroFourPage = `
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>rinko / not found</title>
+        <title>rinko // not found</title>
         <link rel="stylesheet" href="/_/styles.css">
         <link rel="shortcut icon" href="/_/favicon.png" type="image/png">
     </head>

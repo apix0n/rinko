@@ -1,0 +1,29 @@
+{
+	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
+	"name": "rinko",
+	"theme_color": "#f0f0f0",
+	"background_color": "#f0f0f0",
+	"display": "standalone",
+	"scope": "/_",
+	"start_url": "/_",
+	"icons": [
+		{
+			"src": "apple-touch-icon.png",
+			"type": "image/png",
+			"sizes": "128x128",
+			"purpose": "maskable"
+		},
+		{
+			"src": "icon.png",
+			"type": "image/png",
+			"sizes": "128x128",
+			"purpose": "any"
+		},
+		{
+			"src": "icon-larger.png",
+			"type": "image/png",
+			"sizes": "144x144",
+			"purpose": "any"
+		}
+	]
+}

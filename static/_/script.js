@@ -60,7 +60,7 @@ function fetchLinks() {
                         <td data-slug=${link.slug}><a href="/${link.slug}" target="_blank">${link.slug}</a></td>
                         <td><a href="${link.url}" target="_blank">${link.url}</a></td>
                         <td>
-                            <button onclick="editLink('${link.slug}')">edit</button>
+                            <button onclick="editLink('${link.slug}'); document.getElementById('newSlug').focus();">edit</button>
                             <button onclick="deleteLink('${link.slug}')" style="background-color: #f44336;">delete</button>
                         </td>
                     `;

@@ -2,7 +2,7 @@ import type { Bindings } from ".";
 import { generateRandomSlug } from "./utils";
 
 const RESERVED = {
-    exact: new Set(['']),
+    exact: new Set(['favicon.ico']),
     patterns: ["_/"],
 };
 
