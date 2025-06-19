@@ -32,6 +32,7 @@ export function searchPage(origin: string): string {
             </div>
         </div>
         <footer>
+            <span>rinko</span>
             <span><a href="https://github.com/apix0n" target="_blank">by apix</a></span>
             <span><a href="/_/">admin panel</a></span>
         </footer>
