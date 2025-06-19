@@ -1,4 +1,5 @@
 import { Context } from "hono";
+import { getConnInfo } from "hono/cloudflare-workers";
 
 export function generateRandomSlug(length: number = 4): string {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -23,4 +24,21 @@ export async function getPayload(c: Context) {
     }
 
     throw new Error('Unsupported Content-Type');
+}
+
+export function cfData(c: Context) {
+    const request = c.req;
+    const cf = request.raw.cf;
+
+    return {
+        continent: cf?.continent,
+        country: cf?.country,
+        region: cf?.region,
+        city: cf?.city,
+        as: cf?.asOrganization,
+        ua: request.header('User-Agent'),
+        ref: request.header('Referer'),
+        q: request.query(),	
+        ip: getConnInfo(c).remote.address,
+    }
 }

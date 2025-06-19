@@ -26,30 +26,30 @@ using this button, you can deploy rinko to cloudflare workers, but it won't have
 
 #### options / parameters
 
-* `slug`: the short link itself; if you put `123` as slug, you'd go to `{rinko url}/123`. if empty or not given, it creates a random 4-character slug.
+* `slug`: the short link itself; if you put `123` as slug, you'd go to `hxxps://[rinko]/123`. if empty or not given, it creates a random 4-character slug.
 * `url`: the destination link.
 * `overwrite: true/false`: if true, overwrites the link if there was one. if no `url` given, it deletes the specified short link.
 
 #### curl examples
 
 ```bash
-$ curl {rinko url}/_/set -d "url=https://google.com" -H "Authorization: Bearer {api token}"
+$ curl hxxps://[rinko]/_/set -d "url=https://google.com" -H "Authorization: Bearer {api token}"
 {"slug":"oNcK","url":"https://google.com","link":"/oNcK"}
 ```
 
 ```bash
-$ curl {rinko url}/_/set -d "url=https://google.com&slug=google" -H "Authorization: Bearer {api token}"
+$ curl hxxps://[rinko]/_/set -d "url=https://google.com&slug=google" -H "Authorization: Bearer {api token}"
 {"slug":"google","url":"https://google.com","link":"/google"}
 
-$ curl {rinko url}/_/set -d "url=https://google.co.jp&slug=google" -H "Authorization: Bearer {api token}" 
+$ curl hxxps://[rinko]/_/set -d "url=https://google.co.jp&slug=google" -H "Authorization: Bearer {api token}" 
 {"slug":"google","url":"https://google.com","link":"/google","message":"Did not update google because it already was pointing to https://google.com and overwrite was set to false."}
 
-$ curl {rinko url}/_/set -d "url=https://google.co.jp&slug=google&overwrite=true" -H "Authorization: Bearer {api token}"
+$ curl hxxps://[rinko]/_/set -d "url=https://google.co.jp&slug=google&overwrite=true" -H "Authorization: Bearer {api token}"
 {"slug":"google","url":"https://google.co.jp","link":"/google"}
 ```
 
 ```bash
-$ curl {rinko url}/_/set -d "slug=google&overwrite=true" -H "Authorization: Bearer {api token}"
+$ curl hxxps://[rinko]/_/set -d "slug=google&overwrite=true" -H "Authorization: Bearer {api token}"
 {"slug":"google","message":"Deleted link google"}
 ```
 
@@ -62,27 +62,42 @@ $ curl {rinko url}/_/set -d "slug=google&overwrite=true" -H "Authorization: Bear
 ```json
 [
 	{
+		"slug": "google",
+		"url": "https://google.co.jp"
+	},
+	{
 		"slug": "github",
 		"url": "https://github.com/apix0n"
 	},
 	{
-		"slug": "yt",
+		"slug": "yt/video",
 		"url": "https://www.youtube.com/watch?v=shs0rAiwsGQ"
-	},
-	{
-		"slug": "google",
-		"url": "https://google.com"
 	}
 ]
 ```
 
 ---
 
-### reserved links
+### special links
 
-*  `_/` and links beginning with `_/` (like `_/anything`),
-*  `index.html`,
-*  `favicon.ico` & `favicon.png`
+* use `_` as a slug that matches the root page
+
+### restricted links / cannot use
+
+* `_/` prefixes (e.g., _/something),
+
+## search
+
+rinko can behave as a "search engine" for browsers using the format `hxxps://[rinko]/_/search?q=%s` where %s is the url encoded query, and where a space becomes a trailing slash; which redirects to `hxxps://[rinko]/query`.
+
+to register rinko as a search engine, go to `hxxps://[rinko]/` and it should install to your browser automatically.
+if it doesn't work, copy the given link and add it as a custom search engine.
+
+### examples
+
+* `hxxps://[rinko]/_/search?q=google` redirects to `hxxps://[rinko]/google` which itself redirects to `https://google.co.jp`
+* `hxxps://[rinko]/_/search?q=github` redirects to `hxxps://[rinko]/github` which itself redirects to `https://github.com/apix0n`
+* `hxxps://[rinko]/_/search?q=yt%20video` (`hxxps://[rinko]/_/search?q=yt video`) redirects to `hxxps://[rinko]/yt/video` which itself redirects to `https://www.youtube.com/watch?v=shs0rAiwsGQ`
 
 ## host your own
 

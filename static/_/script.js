@@ -262,3 +262,21 @@ function deleteSelected() {
 }
 
 document.getElementById('formSubmitButton').addEventListener('click', submitLinkForm);
+
+document.getElementById('apiToken').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        authenticate();
+    }
+});
+
+document.getElementById('newSlug').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('newUrl').focus();
+    }
+});
+document.getElementById('newUrl').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        submitLinkForm();
+    }
+});

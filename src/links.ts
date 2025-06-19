@@ -2,8 +2,8 @@ import type { Bindings } from ".";
 import { generateRandomSlug } from "./utils";
 
 const RESERVED = {
-    exact: new Set(["_", "favicon.png", "favicon.ico", "index.html"]),
-    patterns: ["_/"] // Could add more like ["_/", "admin/"]
+    exact: new Set(['']),
+    patterns: ["_/"],
 };
 
 const isReserved = (slug: string) =>

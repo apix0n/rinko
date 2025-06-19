@@ -1,9 +1,9 @@
-import { Context, Hono } from 'hono';
+import { Hono } from 'hono';
 import { bearerAuth } from 'hono/bearer-auth'
-import { getConnInfo } from 'hono/cloudflare-workers'
 import { fourZeroFourPage } from './404';
 import { addLink, getLinks } from './links';
-import { getPayload } from './utils';
+import { cfData, getPayload } from './utils';
+import { getSearchPluginXml, searchPage } from './search';
 
 export type Bindings = {
 	[key in keyof CloudflareBindings]: CloudflareBindings[key];
@@ -11,29 +11,25 @@ export type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/favicon.ico', (c) => c.redirect('/favicon.png'))
+app.get('/_/search', (c) => {
+	let query = c.req.query()['q'];
+	query = query.trim().replace(/ /g, '/') // replace space with /
+	query = decodeURIComponent(query) // decode the URI component
+	return c.redirect('/' + query + '?source=rinkoSearch');
+})
+
+app.get('/_/search.xml', (c) => {
+	const url = new URL(c.req.url)
+	const origin = url.origin
+	return c.text(getSearchPluginXml(origin), 200, {
+		'Content-Type': 'text/xml'
+	})
+})
 
 app.use('/_/*', (c, next) => {
 	const auth = bearerAuth({ token: c.env.API_SECRET })
 	return auth(c, next);
 });
-
-function cfData(c: Context) {
-	const request = c.req;
-	const cf = request.raw.cf;
-
-	return {
-		continent: cf?.continent,
-		country: cf?.country,
-		region: cf?.region,
-		city: cf?.city,
-		as: cf?.asOrganization,
-		ua: request.header('User-Agent'),
-		ref: request.header('Referer'),
-		q: request.query(),	
-		ip: getConnInfo(c).remote.address,
-	}
-}
 
 app.post('/_/set', async (c) => {
 	try {
@@ -57,7 +53,7 @@ app.all('/_/*', (c) => {
 })
 
 app.get('/*', async (c) => {
-	const slug = c.req.path.substring(1); // Remove leading slash
+	const slug = c.req.path.substring(1) || '_'; // Remove leading slash
 	const url = await c.env.LINKS.get(slug);
 	console.log({
 		type: "link",
@@ -65,6 +61,11 @@ app.get('/*', async (c) => {
 		url,
 		user: cfData(c),
 	})
+	if (url === null && slug === '_') {
+		const url = new URL(c.req.url)
+		const origin = url.origin
+		return c.html(searchPage(origin))
+	}
 	if (url === null) {
 		return c.status(404);
 	}
