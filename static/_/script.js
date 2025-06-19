@@ -58,7 +58,7 @@ function fetchLinks() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                         <td><input type="checkbox" id="select-${link.slug}"></td>
-                        <td data-slug=${link.slug}><a href="/${link.slug}" target="_blank">${link.slug}</a></td>
+                        <td data-slug=${link.slug}><a href="${link.link}" target="_blank">${link.slug}</a></td>
                         <td><a href="${link.url}" target="_blank">${link.url}</a></td>
                         <td>
                             <button onclick="editLink('${link.slug}'); document.getElementById('newSlug').focus();">edit</button>

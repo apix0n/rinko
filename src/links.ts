@@ -54,7 +54,7 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
             const msg = {
                 slug,
                 url: existing,
-                link: `/${slug}`,
+                link: `/${slug !== "_" ? slug : ''}`,
                 message: `Did not update ${slug} because it already was pointing to ${existing} and overwrite was set to ${overwrite}.`,
             }
             return msg;
@@ -78,7 +78,7 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
     }
 
     await env.LINKS.put(slug, url);
-    const link = { slug, url, link: `/${slug}` }
+    const link = { slug, url, link: `/${slug !== "_" ? slug : ''}` }
     return link;
 }
 
@@ -89,7 +89,8 @@ export async function getLinks(env: Bindings) {
             const url = await env.LINKS.get(link.name);
             return {
                 slug: link.name,
-                url: url
+                url: url,
+                link: `/${link.name !== "_" ? link.name : ''}`
             };
         })
     );
