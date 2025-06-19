@@ -190,8 +190,9 @@ td:nth-child(2) a:hover {
     margin-top: 0;
 }
 
-.form .actions {
+.form .actions, td .actions {
     margin: 0;
+    width: fit-content;
 }
 
 .hidden {

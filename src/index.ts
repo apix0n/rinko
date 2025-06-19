@@ -4,12 +4,17 @@ import { fourZeroFourPage } from './404';
 import { addLink, getLinks } from './links';
 import { cfData, getPayload } from './utils';
 import { getSearchPluginXml, searchPage } from './search';
+import { poweredBy } from 'hono/powered-by';
 
 export type Bindings = {
 	[key in keyof CloudflareBindings]: CloudflareBindings[key];
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use(poweredBy({
+	serverName: "github.com/apix0n/rinko"
+}))
 
 app.get('/favicon.ico', (c) => c.redirect('/_/favicon.png'))
 
