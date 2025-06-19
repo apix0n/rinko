@@ -31,6 +31,7 @@
 			<div class="actions">
 				<button onclick="fetchLinks()">refresh list</button>
 				<button id="addLinkButton" onclick="showAddForm(); document.getElementById('newSlug').focus();">add new link</button>
+				<button id="massImportButton" onclick="showMassImport()">mass import</button>
 				<button id="unselectAllButton" class="hidden" onclick="unselectAll()">unselect all</button>
 				<button id="deleteSelectedButton" onclick="deleteSelected()" style="background-color: #f44336;">delete selected</button>
 			</div>
@@ -62,6 +63,20 @@
 					<input type="url" id="newUrl" placeholder="Enter full URL">
 					<button id="formSubmitButton">add link</button>
 					<button onclick="hideAddForm()" style="background-color: #f44336;">cancel</button>
+				</div>
+			</div>
+
+			<div id="massImportForm" class="hidden">
+				<div class="form">
+					<h3>mass import links</h3>
+					<textarea id="massImportInput" placeholder="Enter one link per line in format: slug targetURL&#10;Example:&#10;/help https://example.com/help&#10;/demo https://example.com/demo" rows="10" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+					<div class="warning-box" style="background: #fff3cd; padding: 10px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+						note that this will overwrite existing links with matching slugs!
+					</div>
+					<div class="actions">
+						<button onclick="processMassImport()">import all</button>
+						<button onclick="hideMassImport()" style="background-color: #f44336;">cancel</button>
+					</div>
 				</div>
 			</div>
 		</div>

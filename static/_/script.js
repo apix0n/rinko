@@ -20,6 +20,7 @@ function setupCheckboxListeners() {
 function updateButtonVisibility() {
     const anyChecked = document.querySelectorAll('#linksTableBody input[type="checkbox"]:checked').length > 0;
     document.getElementById('addLinkButton').classList.toggle('hidden', anyChecked);
+    document.getElementById('massImportButton').classList.toggle('hidden', anyChecked);
     document.getElementById('unselectAllButton').classList.toggle('hidden', !anyChecked);
     document.getElementById('deleteSelectedButton').classList.toggle('hidden', !anyChecked);
 }
@@ -280,3 +281,68 @@ document.getElementById('newUrl').addEventListener('keydown', function (e) {
         submitLinkForm();
     }
 });
+
+// Mass Import Functions
+function showMassImport() {
+    document.getElementById('massImportInput').value = '';
+    document.getElementById('massImportForm').classList.remove('hidden');
+}
+
+function hideMassImport() {
+    document.getElementById('massImportForm').classList.add('hidden');
+}
+
+async function processMassImport() {
+    const input = document.getElementById('massImportInput').value.trim();
+    if (!input) {
+        alert('Please enter links to import');
+        return;
+    }
+
+    const lines = input.split('\n')
+        .map(line => line.trim())
+        .filter(line => line && !line.startsWith('#')); // Ignore empty lines and comments
+
+    if (lines.length === 0) {
+        alert('No valid links found (comments were ignored)');
+        return;
+    }
+
+    const results = [];
+
+    for (const line of lines) {
+        const [slug, url] = line.split(/\s+/).filter(Boolean); // Split on whitespace + remove empty
+        if (!slug || !url) {
+            results.push(`skipped: "${line}" (invalid format)`);
+            continue;
+        }
+
+        try {
+            const response = await fetch('/_/set', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    slug: slug.replace(/^\//, ''), // Remove leading slash
+                    url: url,
+                    overwrite: true
+                })
+            });
+
+            if (response.ok) {
+                results.push(`✅ added: ${slug} → ${url}`);
+            } else {
+                const error = await response.json();
+                results.push(`❌ failed: ${slug} (${error.message || 'server error'})`);
+            }
+        } catch (err) {
+            results.push(`❌ Error: ${slug} (${err.message})`);
+        }
+    }
+
+    alert(results.join('\n'));
+    hideMassImport();
+    fetchLinks(); // Refresh the list
+}

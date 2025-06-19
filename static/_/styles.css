@@ -84,7 +84,8 @@ footer a:hover {
 
 input[type="password"],
 input[type="text"],
-input[type="url"] {
+input[type="url"],
+textarea {
     padding: 8px;
     width: 100%;
     margin: 5px 0 15px;
@@ -98,6 +99,12 @@ input[type="password"]:focus-visible,
 input[type="text"]:focus-visible,
 input[type="url"]:focus-visible {
     outline: var(--accent) solid 2px;
+}
+
+textarea {
+    border-radius: 1rem;
+    width: 100%;
+    min-width: 500px;
 }
 
 button {
@@ -157,7 +164,8 @@ td:nth-child(2) a:hover {
     margin-top: 20px;
 }
 
-#addLinkForm {
+#addLinkForm,
+#massImportForm {
     position: fixed;
     top: 0;
     left: 0;
@@ -180,6 +188,10 @@ td:nth-child(2) a:hover {
 
 .form h3 {
     margin-top: 0;
+}
+
+.form .actions {
+    margin: 0;
 }
 
 .hidden {
