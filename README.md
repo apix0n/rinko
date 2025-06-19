@@ -55,7 +55,7 @@ $ curl hxxps://[rinko]/_/set -d "slug=google&overwrite=true" -H "Authorization: 
 
 ---
 
-### `/_/set` | `GET`
+### `/_/list` | `GET`
 
 * returns the list of all short links with their destinations.
 
@@ -63,15 +63,18 @@ $ curl hxxps://[rinko]/_/set -d "slug=google&overwrite=true" -H "Authorization: 
 [
 	{
 		"slug": "google",
-		"url": "https://google.co.jp"
+		"url": "https://google.co.jp",
+		"link": "/google"
 	},
 	{
 		"slug": "github",
-		"url": "https://github.com/apix0n"
+		"url": "https://github.com/apix0n",
+		"link": "/github"
 	},
 	{
 		"slug": "yt/video",
-		"url": "https://www.youtube.com/watch?v=shs0rAiwsGQ"
+		"url": "https://www.youtube.com/watch?v=shs0rAiwsGQ",
+		"link": "/yt/video"
 	}
 ]
 ```
