@@ -83,7 +83,8 @@ footer a:hover {
 }
 
 input[type="password"],
-input[type="text"] {
+input[type="text"],
+input[type="url"] {
     padding: 8px;
     width: 100%;
     margin: 5px 0 15px;
@@ -93,7 +94,9 @@ input[type="text"] {
     font-size: inherit;
 }
 
-input[type="password"]:focus-visible, input[type="text"]:focus-visible {
+input[type="password"]:focus-visible,
+input[type="text"]:focus-visible,
+input[type="url"]:focus-visible {
     outline: var(--accent) solid 2px;
 }
 
@@ -198,7 +201,7 @@ td:nth-child(2) a:hover {
         height: 100%;
         width: 100%;
     }
-    
+
     .center-container h1 {
         font-size: 3.5em;
     }

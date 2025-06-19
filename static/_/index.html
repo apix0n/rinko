@@ -56,10 +56,10 @@
 					<h3 id="formTitle">add new link</h3>
 					<input type="hidden" id="editMode" value="false">
 					<input type="hidden" id="originalSlug">
-					<label for="newSlug" autocorrect="off" autocapitalize="off">slug:</label>
-					<input type="text" id="newSlug" placeholder="Enter slug (short name)">
+					<label for="newSlug">slug:</label>
+					<input type="text" id="newSlug" placeholder="Enter slug (short name)" autocorrect="off" autocapitalize="off" spellcheck="false">
 					<label for="newUrl">url:</label>
-					<input type="text" id="newUrl" placeholder="Enter full URL">
+					<input type="url" id="newUrl" placeholder="Enter full URL">
 					<button id="formSubmitButton">add link</button>
 					<button onclick="hideAddForm()" style="background-color: #f44336;">cancel</button>
 				</div>
