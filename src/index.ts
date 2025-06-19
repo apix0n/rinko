@@ -77,14 +77,10 @@ app.get('/*', async (c) => {
 		return c.html(searchPage(origin))
 	}
 	if (url === null) {
-		return c.status(404);
+		return c.html(fourZeroFourPage, 404)
 	}
 	// Redirect
 	return c.redirect(url);
 });
-
-app.notFound((c) => {
-	return c.html(fourZeroFourPage)
-})
 
 export default app;
