@@ -201,7 +201,7 @@ function editLink(slug) {
         return;
     }
 
-    const url = row.querySelector('td:nth-child(3) a').href;
+    const url = row.querySelector('td:nth-child(3) a').textContent;
     showEditForm(slug, url);
 }
 
