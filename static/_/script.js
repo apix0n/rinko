@@ -46,7 +46,7 @@ function fetchLinks() {
 		})
 		.then(data => {
 			// Show admin panel
-			document.querySelector('.center-container > div > p').textContent = `manage ${data.length} links for ${new Set(data.filter(item => !item.url.startsWith("/") || item.url.startsWith('/_')).map(item => item.url)).size} destinations`
+			document.querySelector('.center-container > div > p').textContent = `manage ${data.length} links for ${new Set(data.filter(item => new URL(item.url, location.origin).origin !== location.origin || item.url.startsWith('/_')).map(item => item.url)).size} destinations`
 			document.getElementById('authSection').classList.add('hidden');
 			document.getElementById('adminPanel').classList.remove('hidden');
 
