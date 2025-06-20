@@ -59,7 +59,7 @@ function fetchLinks() {
 				row.innerHTML = `
                         <td><input type="checkbox" id="select-${link.slug}"></td>
                         <td data-slug=${link.slug}><a href="${link.link}" target="_blank">${link.slug}</a></td>
-                        <td><a href="${link.url}" target="_blank">${link.url}</a></td>
+                        <td><a href="${new URL(link.url, location.origin)}" target="_blank">${link.url}</a></td>
                         <td>
                             <div class="actions">
                                 <button onclick="editLink('${link.slug}'); document.getElementById('newSlug').focus();">edit</button>
@@ -187,7 +187,7 @@ function submitLinkForm() {
 					throw new Error(msg);
 				}
 				const data = await response.json()
-				if (data.message) throw new Error(data.message)
+				if (data.message && !isEditMode) throw new Error(data.message);
 				alert(`Link ${isEditMode ? 'updated' : 'added'} successfully`);
 				hideAddForm();
 				fetchLinks();

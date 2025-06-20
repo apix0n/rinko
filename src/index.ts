@@ -65,23 +65,23 @@ app.all('/_/*', (c) => {
 
 app.get('/*', async (c) => {
 	const slug = c.req.path.substring(1) || '_'; // Remove leading slash
-	const url = await c.env.LINKS.get(slug);
+	const destinationUrl = await c.env.LINKS.get(slug);
 	console.log({
 		type: "link",
 		slug,
-		url,
+		url: destinationUrl,
 		user: cfData(c),
 	})
-	if (url === null && slug === '_') {
-		const url = new URL(c.req.url)
-		const origin = url.origin
+	const origin = new URL(c.req.url).origin;
+	if (destinationUrl === null && slug === '_') {
 		return c.html(searchPage(origin))
 	}
-	if (url === null) {
+	if (destinationUrl === null) {
 		return c.html(fourZeroFourPage, 404)
 	}
+	const redirectUrl = new URL(destinationUrl, origin)
 	// Redirect
-	return c.redirect(url);
+	return c.redirect(redirectUrl);
 });
 
 export default app;
