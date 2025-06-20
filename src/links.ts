@@ -94,6 +94,7 @@ export async function getLinks(env: Bindings) {
             };
         })
     );
-    results.sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
+    results.filter(entry => entry.link !== null)
+        .sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
     return results;
 }

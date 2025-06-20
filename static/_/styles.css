@@ -3,8 +3,24 @@
 :root {
     --accent: #da86eb;
     --accent-darker: #cf67e4;
-    --background: #f0f0f0;
+    --background: #f2efe9;
+    --background-2: #f9f9f9;
+    --border: #ddd9d2;
     --text: #000;
+    --link: rgb(0, 101, 252);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent: #c860dd;
+        --accent-darker: #be41d7;
+        --background: #1e1f20;
+        --background-2: #282828;
+        --border: #3a3e41;
+        --text: #fff;
+        --link: rgb(64, 139, 251);
+        color-scheme: dark;
+    }
 }
 
 * {
@@ -23,6 +39,8 @@ body {
     align-items: center;
     min-height: 100vh;
     min-height: 100dvh;
+    padding: 5em 0;
+    box-sizing: border-box;
 }
 
 .center-container {
@@ -32,7 +50,6 @@ body {
     align-items: center;
     height: 100%;
     text-align: center;
-    margin-top: 5em;
 }
 
 .center-container h1 {
@@ -75,9 +92,7 @@ a:hover {
 }
 
 .auth-section {
-    margin: 20px 0;
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: calc(2rem + 20px);
     max-width: 500px;
     margin-left: auto;
@@ -95,8 +110,9 @@ textarea {
     padding: 8px;
     width: 100%;
     margin: 5px 0 15px;
-    border: 1px solid #ddd;
+    border: 2px solid var(--border);
     border-radius: 2rem;
+    outline: none;
     box-sizing: border-box;
     font-size: inherit;
 }
@@ -104,7 +120,7 @@ textarea {
 input[type="password"]:focus-visible,
 input[type="text"]:focus-visible,
 input[type="url"]:focus-visible {
-    outline: var(--accent) solid 2px;
+    border-color: var(--accent);
 }
 
 textarea {
@@ -129,13 +145,12 @@ button:hover {
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 th,
 td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
     max-width: 300px;
@@ -143,26 +158,50 @@ td {
     overflow: hidden;
 }
 
-th {
-    background-color: #f2f2f2;
-}
-
 td a {
-    color: rgb(0, 101, 252);
+    color: var(--link);
     text-decoration: none;
 }
 
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: var(--background-2);
 }
 
 td:nth-child(2) a {
     color: inherit;
-    text-decoration: none;
 }
 
 th:not(:nth-child(3)) {
     width: 0;
+}
+
+td {
+    border: solid 2px var(--border);
+    border-style: none solid solid none;
+}
+
+tr:first-child td:first-child {
+    border-top-left-radius: 1em;
+}
+
+tr:first-child td:last-child {
+    border-top-right-radius: 1em;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 1em;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 1em;
+}
+
+tr:first-child td {
+    border-top-style: solid;
+}
+
+tr td:first-child {
+    border-left-style: solid;
 }
 
 .actions {
@@ -191,7 +230,7 @@ th:not(:nth-child(3)) {
     box-sizing: border-box;
     padding: 1.5em;
     border-radius: 2.5em;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
 }
 
 .form h3 {
@@ -204,6 +243,31 @@ td .actions {
     width: fit-content;
 }
 
+#tableWrapper {
+    overflow-x: auto;
+    margin: 0 1em;
+    border-radius: 1em;
+}
+
+#searchInput {
+    display: block;
+    margin: 15px auto;
+    width: 300px;
+}
+
+#searchInput:not(:placeholder-shown)~#linksTable tbody tr td,
+#tableWrapper:has(#searchInput:not(:placeholder-shown)) {
+    border-radius: 0 !important;
+}
+
+#searchInput:not(:placeholder-shown)~#linksTable {
+    border-collapse: collapse;
+}
+
+#searchInput:not(:placeholder-shown)~#linksTable tbody tr td {
+    border-style: solid;
+}
+
 .hidden {
     display: none !important;
 }
@@ -211,6 +275,7 @@ td .actions {
 @media screen and (max-width: 930px) {
     body {
         align-items: normal;
+        padding: 3em 0;
     }
 
     .form {
@@ -218,10 +283,6 @@ td .actions {
         border: unset;
         height: 100%;
         width: 100%;
-    }
-
-    .center-container {
-        margin-top: 3em;
     }
 
     .center-container h1 {

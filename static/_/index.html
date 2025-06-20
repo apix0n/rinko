@@ -35,8 +35,9 @@
 				<button id="unselectAllButton" class="hidden" onclick="unselectAll()">unselect all</button>
 				<button id="deleteSelectedButton" onclick="deleteSelected()" style="background-color: #f44336;">delete selected</button>
 			</div>
-
-			<div style="overflow-x:auto; margin: 0 1em">
+			
+			<div id="tableWrapper">
+				<input type="text" id="searchInput" placeholder="Search slugs or URLs..." oninput="filterLinks()">
 				<table id="linksTable">
 					<thead>
 						<tr>
