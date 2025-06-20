@@ -100,7 +100,7 @@ export async function getLinks(env: Bindings) {
             };
         })
     );
-    results.filter(entry => entry.link !== null)
-        .sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
-    return results;
+    const resultsSorted = results.filter(entry => entry.link !== null)
+        .sort((a, b) => a.slug.localeCompare(b.slug, 'en', { sensitivity: "base" }));
+    return resultsSorted;
 }
