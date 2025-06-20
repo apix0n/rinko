@@ -2,13 +2,15 @@ import type { Bindings } from ".";
 import { generateRandomSlug } from "./utils";
 
 const RESERVED = {
-    exact: new Set(['favicon.ico']),
+    exact: new Set(['favicon.ico', ".", ".."]),
     patterns: ["_/"],
+    includes: ["../", "./"],
 };
 
 const isReserved = (slug: string) =>
     RESERVED.exact.has(slug) ||
-    RESERVED.patterns.some(p => slug.startsWith(p));
+    RESERVED.patterns.some(p => slug.startsWith(p)) ||
+    RESERVED.includes.some(inc => slug.includes(inc));
 
 export async function addLink(env: Bindings, slug: string | undefined, url: string | undefined, overwrite: boolean = false) {
     // Generate random slug if none provided
@@ -78,6 +80,8 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
         }
         return msg
     }
+
+    if (url.startsWith("/")) url = url.slice(1) // remove / for links to other links
 
     await env.LINKS.put(slug, url);
     const link = { slug, url, link: `/${slug !== "_" ? slug : ''}`, message }

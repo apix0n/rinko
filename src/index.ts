@@ -49,7 +49,8 @@ app.post('/_/set', async (c) => {
 		if (Object.keys(result).length === 1 && Object.keys(result)[0] === 'message') return c.json(result, 400);
 		return c.json(result);
 	} catch (error) {
-		return c.json({ error: 'Invalid request format' }, 400);
+		const message = error instanceof Error ? error.message : String(error);
+		return c.json({ message }, 400);
 	}
 });
 

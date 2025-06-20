@@ -88,6 +88,7 @@ $ curl hxxps://[rinko]/_/set -d "slug=google&overwrite=true" -H "Authorization: 
 ### restricted links / cannot use
 
 * `_/` prefixes (e.g., _/something),
+* `.`, `..`, `../`, `./` relative urls links,
 * `favicon.ico`
 
 ## search
