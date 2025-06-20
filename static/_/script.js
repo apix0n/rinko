@@ -118,7 +118,8 @@ function submitLinkForm() {
 		return;
 	}
 
-	const payload = { url, overwrite: true };
+	const payload = { url, overwrite: false };
+	if (isEditMode) payload.overwrite = true;
 	if (slug) payload.slug = slug;
 
 	if (isEditMode && slug !== originalSlug) {
@@ -185,6 +186,8 @@ function submitLinkForm() {
 					} catch { }
 					throw new Error(msg);
 				}
+				const data = await response.json()
+				if (data.message) throw new Error(data.message)
 				alert(`Link ${isEditMode ? 'updated' : 'added'} successfully`);
 				hideAddForm();
 				fetchLinks();

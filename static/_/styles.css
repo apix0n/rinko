@@ -230,7 +230,6 @@ tr td:first-child {
     box-sizing: border-box;
     padding: 1.5em;
     border-radius: 2.5em;
-    border: 1px solid var(--border);
 }
 
 .form h3 {
@@ -287,5 +286,19 @@ td .actions {
 
     .center-container h1 {
         font-size: 3.5em;
+    }
+}
+
+.warning-box {
+    background: #fff3cd;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #ffc107;
+}
+
+@media (prefers-color-scheme: dark) {
+    .warning-box {
+        background: rgb(61, 46, 0);
+        border-color: rgb(176, 132, 0);
     }
 }

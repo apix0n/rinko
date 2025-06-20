@@ -55,6 +55,7 @@ app.post('/_/set', async (c) => {
 
 app.get('/_/list', async (c) => {
 	const result = await getLinks(c.env)
+	console.log({ type: "list", user: cfData(c) })
 	return c.json(result)
 })
 

@@ -45,11 +45,13 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
         return msg;
     }
 
+    let message: string | undefined = undefined;
+
     // Handle regular cases
     const existing = await env.LINKS.get(slug);
     if (existing !== null) {
         if (Boolean(overwrite)) {
-            console.log(`Overriding link ${slug}`);
+            message = `Overwrote URL ${existing}`;
         } else {
             const msg = {
                 slug,
@@ -78,7 +80,7 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
     }
 
     await env.LINKS.put(slug, url);
-    const link = { slug, url, link: `/${slug !== "_" ? slug : ''}` }
+    const link = { slug, url, link: `/${slug !== "_" ? slug : ''}`, message }
     return link;
 }
 
