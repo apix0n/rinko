@@ -81,7 +81,7 @@ export async function addLink(env: Bindings, slug: string | undefined, url: stri
         return msg
     }
 
-    if (url.startsWith("/")) url = url.slice(1) // remove / for links to other links
+    if (url.startsWith("/") && url.length > 1) url = url.slice(1) // remove / for links to other links
 
     await env.LINKS.put(slug, url);
     const link = { slug, url, link: `/${slug !== "_" ? slug : ''}`, message }
