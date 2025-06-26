@@ -355,13 +355,13 @@ async function processMassImport() {
 }
 
 function filterLinks() {
-	const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+	const query = document.getElementById('searchInput').value.trim().toLowerCase();
 	const rows = document.querySelectorAll('#linksTableBody tr');
+	const words = query.split(/\s+/).filter(Boolean);
 
 	rows.forEach(row => {
-		const slug = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-		const url = row.querySelector('td:nth-child(3) a').textContent.toLowerCase();
-		const shouldShow = slug.includes(searchTerm) || url.includes(searchTerm);
-		row.style.display = shouldShow ? '' : 'none';
+		const text = row.textContent.toLowerCase();
+		const matches = words.every(word => text.includes(word));
+		row.style.display = matches ? '' : 'none';
 	});
 }
